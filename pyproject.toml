@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "lytic"
+version = "0.1.0"
+description = "analytics for gevs SESPB"
+authors = ["Pedro Henrick <pedrohenrickqa@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+psycopg = "^3.1.15"
+sqlalchemy = "^2.0.23"
+
+[tool.poetry.group.dev.dependencies]
+psycopg-binary = "^3.1.15"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
