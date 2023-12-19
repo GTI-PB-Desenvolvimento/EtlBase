@@ -17,6 +17,11 @@ pandas = "^2.1.4"
 
 [tool.poetry.group.dev.dependencies]
 psycopg-binary = "^3.1.15"
+pytest = "^7.4.3"
+taskipy = "^1.12.2"
+
+[tool.taskipy.tasks]
+test = 'pytest .'
 
 [build-system]
 requires = ["poetry-core"]
