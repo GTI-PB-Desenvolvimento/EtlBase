@@ -2,7 +2,6 @@ import logging
 import logging.handlers
 from datetime import datetime
 from pathlib import Path
-from os import getenv
 
 from .mail import SMTPConfig
 
@@ -10,19 +9,15 @@ from .mail import SMTPConfig
 LOG_PATH = Path('logs')
 
 
-def setup_logger(name, *handlers):
+def setup_logger(name, *handlers, **kwargs):
     logger = logging.getLogger(name)
 
-    try:
-        log_level = {
-            'debug': logging.DEBUG,
-            'info': logging.INFO,
-            'warn': logging.WARN,
-            'error': logging.ERROR
-        }[getenv('LOG_LEVEL', '')]
-
-    except KeyError:
-        log_level = 'warn'
+    log_level = {
+        'debug': logging.DEBUG,
+        'info': logging.INFO,
+        'warn': logging.WARN,
+        'error': logging.ERROR
+    }[kwargs.get('level', 'warn')]
 
     logger.setLevel(log_level)
 
