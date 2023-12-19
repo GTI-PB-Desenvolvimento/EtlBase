@@ -7,7 +7,7 @@ from os import getenv
 
 LOG_PATH = Path('logs')
 
-def basic_logger(name):
+def setup_logger(name):
     logger = logging.getLogger(name)
 
     try:
