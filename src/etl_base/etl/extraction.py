@@ -62,7 +62,7 @@ class BaseElasticExtraction(BaseExtraction):
 
     def data(self):
         while True:
-            response = rq.get(
+            response = self.rq.get(
                 self._path, data = json.dumps(self._body)
             ).json()
 
