@@ -5,7 +5,7 @@ description = "base for SESPB Etls"
 authors = ["SESPB <suporte@saude.pb.gov.br>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [{ include = "etl_base", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
