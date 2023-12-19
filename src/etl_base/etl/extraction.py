@@ -66,7 +66,7 @@ class BaseElasticExtraction(BaseExtraction):
             ).json()
 
             try:
-                self._scroll_id = response['scroll_id']
+                self._scroll_id = response['_scroll_id']
             except KeyError:
                 return self.data()
 
@@ -74,4 +74,4 @@ class BaseElasticExtraction(BaseExtraction):
                 break
 
             for document in response['hits']['hits']:
-                yield document
+                yield document['_source']
