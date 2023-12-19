@@ -5,6 +5,7 @@ import requests as rq
 from requests.auth import HTTPBasicAuth
 
 from .interfaces import Etl
+from ..exc import SourceIdNotFoundException
 
 
 @dataclass
@@ -67,8 +68,8 @@ class BaseElasticExtraction(BaseExtraction):
 
             try:
                 self._scroll_id = response['_scroll_id']
-            except KeyError:
-                return self.data()
+            except KeyError as e:
+                raise SourceIdNotFoundException from e
 
             if not response['hits']['hits']:
                 break
