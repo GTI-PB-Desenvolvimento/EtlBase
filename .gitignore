@@ -1,3 +1,5 @@
 .venv
+.pytest_cache/**/*
 poetry.lock
 dist/**/*
+**/__pycache__/**
