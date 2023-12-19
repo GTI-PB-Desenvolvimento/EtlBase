@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "lytic"
+name = "EtlBase"
 version = "0.1.0"
-description = "analytics for gevs SESPB"
-authors = ["Pedro Henrick <pedrohenrickqa@gmail.com>"]
+description = "base for SESPB Etls"
+authors = ["SESPB <suporte@saude.pb.gov.br>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "src"}]
