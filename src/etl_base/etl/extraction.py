@@ -29,7 +29,7 @@ class BaseElasticExtraction(BaseExtraction):
         self.rq.auth = HTTPBasicAuth(
             instance.user, instance.password
         )
-        self._url = instance.url
+        self._url = '/'.join([instance.url, '_search'])
         
         self._scroll = kwargs.get('scroll', '1m')
         self._size = kwargs.get('size', '1000')
@@ -51,7 +51,7 @@ class BaseElasticExtraction(BaseExtraction):
 
     @property
     def _body(self):
-        if not self._scroll_id:
+        if self._scroll_id:
             return {
                 'scroll_id': self._scroll_id,
                 'scroll': self._scroll
