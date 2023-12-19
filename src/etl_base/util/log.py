@@ -1,13 +1,16 @@
 import logging
+import logging.handlers
 from datetime import datetime
 from pathlib import Path
 from os import getenv
 
+from .mail import SMTPConfig
 
 
 LOG_PATH = Path('logs')
 
-def setup_logger(name):
+
+def setup_logger(name, *handlers):
     logger = logging.getLogger(name)
 
     try:
@@ -28,7 +31,7 @@ def setup_logger(name):
     )
     stream_handler = logging.StreamHandler()
 
-    for handler in (file_handler, stream_handler):
+    for handler in [file_handler, stream_handler, *handlers]:
         handler.setFormatter(
             logging.Formatter(
                 '%(asctime)s :: %(levelname)s :: %(module)s.%(funcName)s :: %(lineno)d :: %(message)s'
@@ -37,3 +40,12 @@ def setup_logger(name):
         logger.addHandler(handler)
 
     return logger
+
+def setup_email_handler(name, smtp_config: SMTPConfig, toaddrs: list[str]):
+    return logging.handlers.SMTPHandler(
+        mailhost=(smtp_config.host, smtp_config.port),
+        fromaddr=smtp_config.email,
+        toaddrs=toaddrs,
+        subject=name,
+        credentials=(smtp_config.email, smtp_config.password)
+    )
