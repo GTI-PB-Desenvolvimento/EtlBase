@@ -1,10 +1,9 @@
 import json
 from dataclasses import dataclass
 
-import requests as rq
 from requests.auth import HTTPBasicAuth
 
-from .interfaces import Etl
+from .interfaces import RequestsBaseExtraction
 from ..exc import SourceIdNotFoundException
 
 
@@ -15,15 +14,7 @@ class ElasticInstance:
     password: str
 
 
-class BaseExtraction(Etl):
-    def __init__(self, dsn_db):
-        self.engine = self.create_engine(
-            self.connection(dsn_db)
-        )
-        self.rq = rq.session()
-
-
-class BaseElasticExtraction(BaseExtraction):
+class BaseElasticExtraction(RequestsBaseExtraction):
     def __init__(self, dsn_db, instance: ElasticInstance, **kwargs):
         super().__init__(dsn_db)
         self.rq.headers = {'Content-Type': 'application/json'}
