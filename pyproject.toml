@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "EtlBase"
-version = "0.4.0"
+version = "0.5.0"
 description = "base for SESPB ETLs"
 authors = ["SESPB <suporte@saude.pb.gov.br>"]
 license = "MIT"
