@@ -1,9 +1,23 @@
-from selenium.webdriver import Chrome, ChromeOptions
+from os import getenv
+
+from selenium.webdriver import ChromeOptions, Remote
+
+from .exc import CommandExecutorNotSpecifiedException
 
 
-class Webdriver(Chrome):
-    def __init__(self, headless: bool = True) -> None:
-        opts = ChromeOptions()
-        if headless:
-            opts.add_argument('--headless')
-        super().__init__(options=opts)
+class Webdriver(Remote):
+    def __init__(self, **kwargs) -> None:
+        opts = kwargs.pop('opts')
+        if not opts:
+            opts = ChromeOptions()
+            opts.add_argument('--ignore-ssl-errors=yes')
+            opts.add_argument('--ignore-certificate-errors')
+
+        command_executor_url = getenv('COMMAND_EXECUTOR')
+        if not command_executor_url:
+            raise CommandExecutorNotSpecifiedException
+
+        super().__init__(
+            command_executor=command_executor_url,
+            options=opts
+        )
