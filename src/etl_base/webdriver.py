@@ -7,8 +7,9 @@ from .exc import CommandExecutorNotSpecifiedException
 
 class Webdriver(Remote):
     def __init__(self, **kwargs) -> None:
-        opts = kwargs.pop('opts')
-        if not opts:
+        try:
+            opts = kwargs.pop('opts')
+        except KeyError:
             opts = ChromeOptions()
             opts.add_argument('--ignore-ssl-errors=yes')
             opts.add_argument('--ignore-certificate-errors')
