@@ -15,8 +15,8 @@ class ElasticInstance:
 
 
 class BaseElasticExtraction(RequestsBaseExtraction):
-    def __init__(self, dsn_db, instance: ElasticInstance, **kwargs):
-        super().__init__(dsn_db)
+    def __init__(self, instance: ElasticInstance, **kwargs):
+        super().__init__()
         self.rq.headers = {'Content-Type': 'application/json'}
         self.rq.auth = HTTPBasicAuth(
             instance.user, instance.password

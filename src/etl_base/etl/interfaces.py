@@ -1,10 +1,10 @@
 import requests as rq
 
-from ..db import pg_engine, PGConfig
+from ..db import pg_engine
 
 
 class RequestsBaseExtraction:
-    def __init__(self, db_config: PGConfig):
-        self.engine = pg_engine(db_config)
+    def __init__(self):
+        self.engine = pg_engine()
         self.rq = rq.session()
 
